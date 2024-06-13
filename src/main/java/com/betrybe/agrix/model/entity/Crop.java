@@ -1,18 +1,23 @@
 package com.betrybe.agrix.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * Entity by crop.
  */
 @Entity
 @Table(name = "crops")
+@EntityListeners(AuditingEntityListener.class)
 public class Crop {
 
   @Id
@@ -21,6 +26,12 @@ public class Crop {
 
   private String name;
   private Double plantedArea;
+
+  @Column(name = "planted_date")
+  private LocalDate plantedDate;
+
+  @Column(name = "harvest_date")
+  private LocalDate harvestDate;
 
   @ManyToOne
   @JoinColumn(name = "farm_id")
@@ -55,6 +66,21 @@ public class Crop {
     this.name = name;
   }
 
+  public LocalDate getPlantedDate() {
+    return plantedDate;
+  }
+
+  public void setPlantedDate(LocalDate planedDate) {
+    this.plantedDate = planedDate;
+  }
+
+  public LocalDate getHarvestDate() {
+    return harvestDate;
+  }
+
+  public void setHarvestDate(LocalDate harvestDate) {
+    this.harvestDate = harvestDate;
+  }
 
   public Farm getFarm() {
     return farm;

@@ -7,7 +7,7 @@ COPY . .
 # dependecy para deixar em cache as dependencias do mvn no docker
 RUN ./mvnw dependency:go-offline
 
-RUN ./mvnw install
+COPY . .
 
 RUN ./mvnw clean package
 
@@ -15,8 +15,8 @@ FROM eclipse-temurin:17-jre-jammy
 
 WORKDIR /app
 
-COPY --from=build-image /to-build-app/target/*.jar /app/app.jar
+COPY --from=build-image /to-build-app/target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
