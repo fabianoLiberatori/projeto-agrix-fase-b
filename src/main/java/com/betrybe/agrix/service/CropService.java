@@ -72,4 +72,10 @@ public class CropService {
     cropRepository.save(crops);
   }
 
+  public List<Fertilizer> findFertilizersFromCropId(Long cropId)
+      throws CropNotFoundException {
+    Crop crops = findById(cropId);
+    return crops.getFertilizers();
+  }
+
 }
