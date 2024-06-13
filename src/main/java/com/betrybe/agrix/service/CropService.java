@@ -2,9 +2,11 @@ package com.betrybe.agrix.service;
 
 import com.betrybe.agrix.model.entity.Crop;
 import com.betrybe.agrix.model.entity.Farm;
+import com.betrybe.agrix.model.entity.Fertilizer;
 import com.betrybe.agrix.model.repository.CropRepository;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
 import com.betrybe.agrix.service.exception.FarmNotFoundException;
+import com.betrybe.agrix.service.exception.FertilizerNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,17 @@ public class CropService {
 
   private final CropRepository cropRepository;
   private final FarmService farmService;
+  private final FertilizerService fertilizerService;
 
+  /**
+   * Contructor to repositorys.
+   */
   @Autowired
-  public CropService(CropRepository cropRepository, FarmService farmService) {
+  public CropService(CropRepository cropRepository, FarmService farmService,
+      FertilizerService fertilizerService) {
     this.cropRepository = cropRepository;
     this.farmService = farmService;
+    this.fertilizerService = fertilizerService;
   }
 
   public Crop findById(long id) throws CropNotFoundException {
@@ -51,6 +59,17 @@ public class CropService {
 
   public List<Crop> searchCrops(LocalDate start, LocalDate end) {
     return cropRepository.findByHarvestDateBetween(start, end);
+  }
+
+  /**
+   * Association Fertilizers to Crop by id.
+   */
+  public void addFertilizerToCrop(Long cropId, Long fertilizerId)
+      throws CropNotFoundException, FertilizerNotFoundException {
+    Crop crops = findById(cropId);
+    Fertilizer fertilizers = fertilizerService.findById(fertilizerId);
+    crops.getFertilizers().add(fertilizers);
+    cropRepository.save(crops);
   }
 
 }
