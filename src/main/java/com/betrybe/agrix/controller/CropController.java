@@ -2,17 +2,16 @@ package com.betrybe.agrix.controller;
 
 
 import com.betrybe.agrix.controller.dto.CropDto;
-import com.betrybe.agrix.controller.dto.FarmDto;
 import com.betrybe.agrix.model.entity.Crop;
-import com.betrybe.agrix.model.entity.Farm;
 import com.betrybe.agrix.service.CropService;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
-import com.betrybe.agrix.service.exception.FarmNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -20,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/crops")
-public class CorpController {
+public class CropController {
 
   private final CropService cropService;
 
   @Autowired
-  public CorpController(CropService cropService) {
+  public CropController(CropService cropService) {
     this.cropService = cropService;
   }
 
@@ -44,5 +43,18 @@ public class CorpController {
   public CropDto findById(@PathVariable("id") long id) throws CropNotFoundException {
     Crop crop = cropService.findById(id);
     return CropDto.fromEntity(crop);
+  }
+
+  /**
+   * Search crops for startDate and endDate.
+   */
+  @GetMapping("/search")
+  public List<CropDto> harvestDateByCrops(
+      @RequestParam LocalDate start, @RequestParam LocalDate end
+  ) {
+    List<Crop> crops = cropService.searchCrops(start, end);
+    return crops.stream()
+        .map(CropDto::fromEntity)
+        .toList();
   }
 }
