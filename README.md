@@ -1,10 +1,15 @@
 # :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+<ol>
+  <li>Migre seu código da Fase A para este projeto (Fase B)	✔️</li>
+  <li>Escreva testes com cobertura mínima de 80% das linhas da classe PersonService	✔️</li>
+  <li>Ajuste (ou crie) a rota POST /farms/{farmId}/crops para utilizar datas	✔️</li>
+  <li>Ajuste (ou crie) a rota GET /farms/{farmId}/crops para utilizar datas	✔️</li>
+  <li>Ajuste (ou crie) a rota GET /crops para utilizar datas	✔️</li>
+  <li>Ajuste (ou crie) a rota GET /crops/{id} para utilizar datas	✔️</li>
+  <li>Crie a rota GET /crops/search para busca de plantações	✔️</li>
+  <li>Crie a rota POST /fertilizers	✔️</li>
+  <li>Crie a rota GET /fertilizers	✔️</li>
+  <li>Crie a rota GET /fertilizers/{id}	✔️</li>
+  <li>Crie a rota POST /crops/{cropId}/fertilizers/{fertilizerId}	✔️</li>
+  <li>Crie a rota GET /crops/{cropId}/fertilizers	✔️</li>
+</ol>
