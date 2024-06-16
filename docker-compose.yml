@@ -7,9 +7,9 @@ services:
     ports:
       - "8080:8080"
     links:
-      - mysql:agrix
+      - mysql:agrix-db
     environment:
-      - DATABASE_HOST=mysql #uma rede de containers usa-se o nome do servico (msql)
+      - DATABASE_HOST=jdbc:mysql://mysql:3306/agrix?createDatabaseIfNotExist=true #uma rede de containers usa-se o nome do servico (msql)
       - DATABASE_PORT=3306
       - DATABASE_USER=root
       - DATABASE_PASSWORD=root
